@@ -1,0 +1,47 @@
+{{ template "header.html" .}}
+
+<div class="columns">
+<form class="form-horizontal" method="POST" action="/web/settings">
+    <fieldset>
+    <legend class="column">Images related settings:</legend>
+  <div class="form-group">
+    <div class="column col-6">
+      <label class="form-label" for="ts">Thumbnails Size</label>
+    </div>
+    <div class="column col-3">
+      <select class="form-select select-sm" id="ts" name="thumb_size">
+    {{ $tsize := .thumbSel }}
+    {{ range $ts := .thumbs }}
+        {{ if eq $ts $tsize }}
+            <option value="{{ $ts }}" selected>{{ $ts }}x{{ $ts }}</option>
+        {{ else }}
+            <option value="{{ $ts }}">{{ $ts }}x{{ $ts }}</option>
+        {{ end }}
+    {{ end }}
+       </select>
+    </div>
+    <div class="column col-6">
+      <label class="form-label" for="sf">Scale factor</label>
+    </div>
+    <div class="column col-3">
+      <select class="form-select select-sm" id="sf" name="scale_factor">
+    {{ $scale := .scaleSel }}
+    {{ range $sc := .scales }}
+        {{ if eq $sc $scale }}
+            <option value="{{ $sc }}" selected>{{ $sc }}</option>
+        {{ else }}
+            <option value="{{ $sc }}">{{ $sc }}</option>
+        {{ end }}
+    {{ end }}
+      </select>
+    </div>
+  </div>
+</fieldset>
+<div class="column col-3">
+<input class="btn" type="submit" value="Save">
+</div>
+
+</form>
+</div>
+
+{{ template "footer.html" .}}

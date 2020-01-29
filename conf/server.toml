@@ -1,0 +1,9 @@
+imagesRoot = "/srv/data/pix/Photos"
+appRoot = "/home/faust93/go/src/galerun"
+serverAddr = "192.168.1.123"
+serverPort = 8088
+thumbSizes = [64, 96, 128, 200, 256]
+scaleFactors = [0.0, 1.5, 1.8, 2.0, 2.5, 3.0, 3.5, 3.8]
+useSSL = true
+SSLCert = "./conf/server.crt"
+SSLKey = "./conf/server.key"

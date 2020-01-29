@@ -1,0 +1,224 @@
+body {
+  margin: 0;
+}
+
+/* Disable ugly boxes around images in IE10 */
+a img{
+  border: 0px;
+}
+/*
+::-moz-selection {
+    -moz-user-select:none;
+}
+::selection {
+    -moz-user-select:none;
+}
+*/
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+/*a:focus,a:hover,a:active,a:link{outline: 0px none;}*/
+
+#container {
+    padding:10px;
+    background: #F1F1F1;
+    width: 100%;
+    margin: 0 auto;
+    }
+
+.unloaded, .failed {
+    display: none;
+    }
+
+#popup-menu {
+    left: 10px;
+    top: 10px;
+    width: 200px;
+    height: 100px;
+    display: none;
+    position: fixed;
+    z-index: 5;
+}
+
+#loading-box {
+    color: white;
+    font-family: sans-serif;
+    background: #333;
+    padding:20px;
+    width:100%;
+    position: fixed;
+    text-align: center;
+    bottom:0;
+    left: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.2s;
+    }
+
+.clear {
+    clear:both;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+    }
+
+.g-shadow {
+    box-shadow: 0 4px 15px -15px black;
+}
+
+.g-img {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    }
+
+.img-view {
+  width: 90%;
+  margin: auto;
+}
+
+.images-segment {
+  width: 100%;
+  z-index: 0;
+/*  white-space: nowrap; 
+  overflow-x: auto; 
+  display: inline-block;*/
+}
+
+.g-img-radius {
+  border-radius: 7px;
+}
+
+.g-card-image {
+  margin: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.plyr.plyr--stopped .plyr__controls { display: none }
+
+.g-card-video {
+  margin: 2px;
+  position: relative;
+  display: inline-block;
+}
+
+.g-card_tit {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  font-size: 75%;
+  width: 100%;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.6);
+  right: 0;
+  bottom: 3%;
+}
+
+.g-card-image > .g-card_title {
+  border-radius: 8px;
+  padding: 0px;
+  height: 50px;
+  position: absolute;
+  top: 74%;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+.g-title-text {
+  padding-top: 7%;
+  text-align: center;
+  overflow: hidden;
+  color: white;
+}
+
+.navbar-sticky {
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px -15px black;
+    z-index: 3;
+}
+
+.navi-container {
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 2;
+}
+
+.navi {
+    cursor: default;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+.navi:hover {
+    opacity: 0.8;
+}
+
+
+.android-header .mdl-menu__container {
+  z-index: 50;
+  margin: 0 !important;
+}
+
+
+.mdl-textfield--expandable {
+  width: auto;
+}
+
+.android-fab {
+  position: absolute;
+  right: 20%;
+  bottom: -26px;
+  z-index: 3;
+  background: #64ffda !important;
+  color: black !important;
+}
+
+.android-mobile-title {
+  display: none !important;
+}
+
+
+.android-header {
+  overflow: visible;
+}
+
+  .android-header .material-icons {
+/*    color: #767777 !important;*/
+  }
+
+  .android-header .mdl-layout__drawer-button {
+    background: transparent;
+    color: #767777;
+  }
+
+  .android-header .mdl-navigation__link {
+/*    color: #757575;*/
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+.android-navigation-container {
+    /* Simple hack to make the overflow happen to the left instead... */
+    direction: rtl;
+    order: 1;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+}
+

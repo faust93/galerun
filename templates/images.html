@@ -1,0 +1,137 @@
+{{ template "header_img.html" . }}
+    <script>
+    function imageClicked(event) {
+        var $imgs = $('.img-view');
+        $imgs.viewer({
+         url: 'data-original',
+         inline: false,
+         filter: function(img){
+                 if(img.className.includes("folder")){
+                    return false;
+                 } else {
+                    return true;
+                }
+            },
+         viewed: function() {
+            $imgs.viewer('zoom', 0.2);
+            }
+        });
+    }
+
+    function imgMenu(event) {
+        event.preventDefault();
+        var $m = $('#popup-menu')[0];
+        $m.setAttribute('file-name', event.target.getAttribute('data-original'));
+        $m.style.left = (event.x - 10)+"px";
+        $m.style.top = (event.y - 10)+"px";
+        $m.style.display="inline";
+        return false;
+    }
+
+    function imageDelete(event) {
+        var $path_file = $('#popup-menu')[0].getAttribute('file-name');
+        var $file = $path_file.match(/f=(.*)/)[1];
+        var $img = $("img[data-original='" + $path_file + "']").parent();
+
+        $.ajax({
+            url: "/api/del?f=" + $file,
+            type:"DELETE",
+            success: function(result){
+                $img[0].style.display="none";
+            },
+            error: function(error){
+                alert(error.responseJSON.data.error.error_message);
+            }
+            })
+    }
+
+    function imageExif(event) {
+        var $path_file = $('#popup-menu')[0].getAttribute('file-name');
+        var $file = $path_file.match(/f=(.*)/)[1];
+        $.ajax({
+            url: "/api/exif?f=" + $file,
+            type:"GET",
+            success: function(result){
+                $("#exif-content").html(result.data.message);
+                $("#exif-modal")[0].classList.add("active");
+            },
+            error: function(error){
+                alert(error.responseJSON.data.error.error_message);
+            }
+            })
+    }
+
+    $(document).bind("click", function(event) {
+        document.getElementById("popup-menu").style.display="none";
+    });
+
+    </script>
+
+    <div class="navi-container">
+    <ul class="breadcrumb">
+    {{ $link := "" }}
+    {{ range $i, $elem := .path }}
+    <li class="breadcrumb-item">
+    {{ if eq $elem "" }}
+        <a href="/web/images">Home</a>
+    {{ else }}
+        {{ $link = (print $link "/" $elem) }}
+        <a href="?d={{ $link }}">{{ $elem }}</a>
+    {{ end }}
+    </li>
+    {{ end }}
+    </ul>
+    </div>
+
+    <div class="imgages-segment">
+        <div class="img-view">
+        {{ $thumb := .thumbS }}
+        {{ $scale := .scaleF }}
+        {{ range $img := .payload }}
+            {{ if eq $img.Type "f" }}
+                <div class="g-card-image tooltip" data-tooltip="{{ $img.Name }}&#10;Size: {{ $img.Size }}">
+                <img class="g-img-radius unloaded" height="100%" data-src="/api/thumb?w={{ $thumb }}&h={{ $thumb }}&f={{ $img.Path }}/{{ $img.Name }}"
+                data-original="/api/img?s={{ $scale }}&f={{ $img.Path }}/{{ $img.Name }}" onclick="imageClicked(event)" oncontextmenu="imgMenu(event)">
+            {{ else }}
+                <div class="g-img g-card-image" style="width:{{ $thumb}}px">
+                <a href="/web/images/?d={{ $img.Path }}/{{ $img.Name }}">
+                <img class="g-img g-img-radius folder" height="100%" src="/api/thumb?w={{ $thumb }}&h={{ $thumb }}&f={{ $img.Path }}/{{ $img.Name }}"></a>
+                <span class="g-card_tit label">{{ $img.Name }} ({{$img.Size}})</span>
+            {{ end }}
+            </div>
+        {{end}}
+        </div>
+
+            <div id="popup-menu" file-name="">
+            <ul class="menu">
+            <li class="menu-item">
+            <a href="javascript:void(0)" onclick="imageDelete(event)"><i class="icon icon-delete"></i>Delete</a>
+            </li>
+            <li class="menu-item">
+            <a href="#"><i class="icon icon-photo"></i> Mogrify</a>
+            </li>
+            <li class="menu-item">
+            <a href="javascript:void(0)" onclick="imageExif(event)"><i class="icon icon-location"></i>Exif</a>
+            </li>
+            </ul>
+            </div>
+
+            <div id="exif-modal" class="modal modal-sm">
+            <a class="modal-overlay" href="#" aria-label="Close"></a> 
+            <div class="modal-container">
+            <div class="modal-header">
+                <a href="#close" class="btn btn-clear float-right" aria-label="Close" onclick="javascript:$('#exif-modal')[0].classList.remove('active');"></a>
+                <div class="modal-title h6">Exif Data</div>
+            </div>
+            <div class="modal-body">
+            <div id="exif-content" class="content">
+            </div>
+            </div>
+            </div>
+
+        <div id="loading-box">
+            <div class="loading loading-lg inverted"></div>
+        </div>
+    </div>
+
+{{ template "footer.html" .}}

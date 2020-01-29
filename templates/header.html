@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>{{ .title }}</title>
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="/assets/spectre.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/spectre-icons.min.css" />
+        <script src="/assets/jquery-2.2.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/assets/styles.css" />
+    </head>
+
+<body>
+
+<div class="navbar-sticky column">
+<header class="navbar">
+<section class="navbar-section">
+<a href="/web/images" class="navbar-brand m-2">GALERUN</a>
+<a href="/web/images" class="btn btn-link">Images</a>
+<a href="/web/videos" class="btn btn-link">Videos</a>
+</section>
+
+<section class="navbar-section">
+<a class="avatar mr-2 text-uppercase" href="#user-modal" data-initial="{{ .user }}"></a>
+</section>
+</header>
+</div>
+<div id="user-modal" class="modal modal-sm">
+<a class="modal-overlay" href="#" aria-label="Close"></a>
+<div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h6">User actions</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+      <a class="btn" href="/web/settings" aria-label="Settings">Settings</a>
+      <a class="btn" href="/logout">Logout</a>
+      </div>
+    </div>
+</div>
+</div>
+<div id="ontainer" class="container">

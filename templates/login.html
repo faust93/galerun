@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>{{ .title }}</title>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/assets/spectre.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/spectre-icons.min.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/styles.css" />
+</head>
+<body>
+
+<div id="ontainer" class="container">
+
+<div style="width: 330px; padding: 10% 0; margin: auto;">
+<div class="g-shadow card">
+
+<div class="card-header">
+    <div class="card-title h5">GALERUN</div>
+    <div class="card-subtitle text-gray">Enter your login and password</div>
+    <div class="card-subtitle text-error">{{ .status }}</div>
+  </div>
+<div class="card-body">
+<form method="POST" action="/login">
+<div class="form-group">
+    <label class="form-label" for="login">Name</label>
+    <input class="form-input" type="text" name="user" id="login" placeholder="Name" required>
+    <label class="form-label" for="password">Password</label>
+    <input class="form-input" type="password" name="password" id="password" placeholder="Password" required>
+</div>
+</div>
+<div class="card-footer">
+    <input class="btn btn-primary" type="submit" value="Login">
+</div>
+</form>
+
+</div>
+</div>
+
+</body>
+</html>
